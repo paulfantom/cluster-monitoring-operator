@@ -82,6 +82,7 @@
 // assets/prometheus-k8s/service-monitor.yaml
 // assets/prometheus-k8s/service.yaml
 // assets/prometheus-k8s/serving-certs-ca-bundle.yaml
+// assets/prometheus-k8s/trusted-ca-bundle.yaml
 // assets/prometheus-operator/cluster-role-binding.yaml
 // assets/prometheus-operator/cluster-role.yaml
 // assets/prometheus-operator/deployment.yaml
@@ -1833,6 +1834,26 @@ func assetsPrometheusK8sServingCertsCaBundleYaml() (*asset, error) {
 	return a, nil
 }
 
+var _assetsPrometheusK8sTrustedCaBundleYaml = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x4c\xce\xb1\xae\xc2\x30\x0c\x85\xe1\x3d\x4f\x61\x65\x4f\xaf\xee\x9a\x95\x99\x95\xdd\x4d\xdc\xd6\xd0\xd8\x51\xe2\xf0\xfc\x08\x28\x88\xed\x0c\x9f\x7e\x1d\xac\x7c\xa1\xd6\x59\x25\xc2\xfd\xdf\x65\x34\x8c\x0e\x20\x61\x98\x87\xe4\x9d\xa6\xd4\x2c\x82\xf7\xee\xc6\x92\x23\x9c\x54\x16\x5e\xcf\x58\x5d\x21\xc3\x8f\xde\x71\xa6\xbd\x3f\x17\x40\x7a\x89\x49\x2b\x49\xdf\x78\xb1\x89\xf5\x8f\xe5\x4a\xc9\x82\xb5\xd1\x8d\x72\x48\xf8\x6e\x47\xf0\xd6\x06\x79\x07\x20\x58\x28\x42\x6d\x5a\xc8\x36\x1a\xfd\xc7\x1e\x47\x0e\xd4\x2b\x26\x8a\xf0\xcd\x87\xa2\xc2\xa6\x8d\x65\x75\x8f\x00\x00\x00\xff\xff\xac\x1f\x67\xab\xcc\x00\x00\x00")
+
+func assetsPrometheusK8sTrustedCaBundleYamlBytes() ([]byte, error) {
+	return bindataRead(
+		_assetsPrometheusK8sTrustedCaBundleYaml,
+		"assets/prometheus-k8s/trusted-ca-bundle.yaml",
+	)
+}
+
+func assetsPrometheusK8sTrustedCaBundleYaml() (*asset, error) {
+	bytes, err := assetsPrometheusK8sTrustedCaBundleYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "assets/prometheus-k8s/trusted-ca-bundle.yaml", size: 204, mode: os.FileMode(420), modTime: time.Unix(1, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
 var _assetsPrometheusOperatorClusterRoleBindingYaml = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x7c\x90\xbd\x4e\xc5\x30\x0c\x85\xf7\x3c\x85\x5f\xe0\x86\x8b\x60\x40\xd9\x80\x81\xfd\x22\xb1\xbb\xa9\x2f\x35\x4d\xed\xc8\x71\x3a\xf0\xf4\xa8\xfc\x4c\xa8\xdd\x2c\xf9\x9c\x4f\xfe\x8c\x95\xdf\xc8\x1a\xab\x24\xb0\x01\x73\xc4\xee\x93\x1a\x7f\xa2\xb3\x4a\x9c\x1f\x5a\x64\xbd\x59\x6f\xc3\xcc\x32\x26\x78\x2e\xbd\x39\xd9\x45\x0b\x3d\xb1\x8c\x2c\xef\x61\x21\xc7\x11\x1d\x53\x00\x28\x38\x50\x69\xdb\x04\x80\xb5\xc6\xb9\x0f\x64\x42\x4e\xdf\x94\xac\x4b\x55\x21\xf1\x04\x59\xc5\x4d\x4b\x21\xdb\xc9\x0a\x2e\x94\xa0\x9a\x2e\xe4\x13\xf5\x76\xd2\x4a\x86\xae\x7b\xf9\xf5\x4f\x62\x3d\xc7\xbb\xfb\x78\x0e\x00\xfb\x08\xd3\x42\x17\xba\x6e\x77\x62\xe5\x17\xd3\x5e\x0f\xec\x03\xc0\x3f\xf9\x43\x7c\xeb\xc3\x07\x65\x6f\x29\x9c\x7e\x9b\xaf\x64\x2b\x67\x7a\xcc\x59\xbb\xf8\x61\xf9\x67\xd7\x2a\x66\x4a\xa0\x95\xa4\x4d\x7c\xf5\xd3\xa2\xc2\xae\xb6\x3d\xfc\x2b\x00\x00\xff\xff\xb6\xc0\xd1\x0d\xb3\x01\x00\x00")
 
 func assetsPrometheusOperatorClusterRoleBindingYamlBytes() ([]byte, error) {
@@ -2847,6 +2868,7 @@ var _bindata = map[string]func() (*asset, error){
 	"assets/prometheus-k8s/service-monitor.yaml": assetsPrometheusK8sServiceMonitorYaml,
 	"assets/prometheus-k8s/service.yaml": assetsPrometheusK8sServiceYaml,
 	"assets/prometheus-k8s/serving-certs-ca-bundle.yaml": assetsPrometheusK8sServingCertsCaBundleYaml,
+	"assets/prometheus-k8s/trusted-ca-bundle.yaml": assetsPrometheusK8sTrustedCaBundleYaml,
 	"assets/prometheus-operator/cluster-role-binding.yaml": assetsPrometheusOperatorClusterRoleBindingYaml,
 	"assets/prometheus-operator/cluster-role.yaml": assetsPrometheusOperatorClusterRoleYaml,
 	"assets/prometheus-operator/deployment.yaml": assetsPrometheusOperatorDeploymentYaml,
@@ -3031,6 +3053,7 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"service-monitor.yaml": &bintree{assetsPrometheusK8sServiceMonitorYaml, map[string]*bintree{}},
 			"service.yaml": &bintree{assetsPrometheusK8sServiceYaml, map[string]*bintree{}},
 			"serving-certs-ca-bundle.yaml": &bintree{assetsPrometheusK8sServingCertsCaBundleYaml, map[string]*bintree{}},
+			"trusted-ca-bundle.yaml": &bintree{assetsPrometheusK8sTrustedCaBundleYaml, map[string]*bintree{}},
 		}},
 		"prometheus-operator": &bintree{nil, map[string]*bintree{
 			"cluster-role-binding.yaml": &bintree{assetsPrometheusOperatorClusterRoleBindingYaml, map[string]*bintree{}},
