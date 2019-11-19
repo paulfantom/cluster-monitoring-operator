@@ -96,6 +96,7 @@ var (
 	PrometheusK8sServingCertsCABundle     = "assets/prometheus-k8s/serving-certs-ca-bundle.yaml"
 	PrometheusK8sKubeletServingCABundle   = "assets/prometheus-k8s/kubelet-serving-ca-bundle.yaml"
 	PrometheusK8sGrpcTLSSecret            = "assets/prometheus-k8s/grpc-tls-secret.yaml"
+	PrometheusK8sTrustedCABundle          = "assets/prometheus-k8s/trusted-ca-bundle.yaml"
 
 	PrometheusUserWorkloadServingCertsCABundle     = "assets/prometheus-user-workload/serving-certs-ca-bundle.yaml"
 	PrometheusUserWorkloadServiceAccount           = "assets/prometheus-user-workload/service-account.yaml"
@@ -1052,7 +1053,16 @@ func (f *Factory) SharingConfig(promHost, amHost, grafanaHost, thanosHost *url.U
 	}
 }
 
-func (f *Factory) PrometheusK8s(host string, grpcTLS *v1.Secret) (*monv1.Prometheus, error) {
+func (f *Factory) PrometheusK8sTrustedCABundle() (*v1.ConfigMap, error) {
+	cm, err := f.NewConfigMap(MustAssetReader(PrometheusK8sTrustedCABundle))
+	if err != nil {
+		return nil, err
+	}
+
+	return cm, nil
+}
+
+func (f *Factory) PrometheusK8s(host string, grpcTLS *v1.Secret, trustedCABundleCM *v1.ConfigMap) (*monv1.Prometheus, error) {
 	p, err := f.NewPrometheus(MustAssetReader(PrometheusK8s))
 	if err != nil {
 		return nil, err
@@ -1139,6 +1149,21 @@ func (f *Factory) PrometheusK8s(host string, grpcTLS *v1.Secret) (*monv1.Prometh
 			},
 		},
 	})
+
+	if trustedCABundleCM != nil {
+		volumeName := "prometheus-trusted-ca-bundle"
+		volumePath := "/etc/pki/ca-trust/extracted/pem/"
+		p.Spec.VolumeMounts = append(p.Spec.VolumeMounts, trustedCABundleVolumeMount(volumeName, volumePath))
+		volume := trustedCABundleVolume(trustedCABundleCM.Name, volumeName)
+		volume.VolumeSource.ConfigMap.Items = append(volume.VolumeSource.ConfigMap.Items, v1.KeyToPath{
+			Key:  "ca-bundle.crt",
+			Path: "tls-ca-bundle.pem",
+		})
+		p.Spec.Volumes = append(p.Spec.Volumes, volume)
+		for i := range p.Spec.Containers {
+			p.Spec.Containers[i].VolumeMounts = append(p.Spec.Containers[i].VolumeMounts, trustedCABundleVolumeMount(volumeName, volumePath))
+		}
+	}
 
 	return p, nil
 }
