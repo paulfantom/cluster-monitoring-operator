@@ -68,6 +68,9 @@ spec:
   - name: kube-apiserver.rules
     rules:
     - expr: |
+        sum(rate(apiserver_request_duration_seconds_sum{job="apiserver",subresource!="log",verb!~"^(?:LIST|WATCH|WATCHLIST|PROXY|CONNECT)$"}[5m])) without(instance, pod) / sum(rate(apiserver_request_duration_seconds_count{job="apiserver",subresource!="log",verb!~"^(?:LIST|WATCH|WATCHLIST|PROXY|CONNECT)$"}[5m])) without(instance, pod)
+      record: cluster:apiserver_request_latency_seconds:mean5m
+    - expr: |
         histogram_quantile(0.99, sum(rate(apiserver_request_duration_seconds_bucket{job="apiserver"}[5m])) without(instance, pod))
       labels:
         quantile: "0.99"
